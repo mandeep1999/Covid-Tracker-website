@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel = "icon" href =  
+    "https://cdn4.iconfinder.com/data/icons/coronavirus-1/512/wuhan-coronavirus-virus-outbreak-02-512.png" 
+            type = "image/x-icon">
+    <title>Covid - 19</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="mypanel"></div>
+
+    <script>
+      var confirmed,active,recovered;
+      var list = [];
+    $.getJSON('https://api.covid19india.org/data.json', function(data1) {
+       confirmed = data1.statewise[0].confirmed;
+       active = data1.statewise[0].active;
+       recovered = data1.statewise[0].recovered;
+      
+       for(i=1;i<37;i++){
+         list.push(data1.statewise[i]);
+       }
+       i=1;
+       list.forEach(function(data){
+         var card = "<div class = \"pos card\"  ><img class=\"card-img-top\" src=\"assets/" +
+           data.statecode+".jpg\" alt=\"Card image cap\"> <br> State : " 
+          + data.state  + "<br> Confirmed cases : " + data.confirmed + "<br> Active cases : " +
+           data.active + " </div><br> ";
+           if(i%3==1)
+           $(".first").append(card);
+           if(i%3==2)
+           $(".second").append(card);
+           if(i%3==0)
+           $(".third").append(card);
+           i++;
+       })
+    document.getElementById("confirmed").innerText = confirmed;
+    $("#active").text(active);
+    $("#recovered").text(recovered);
+    $(".states").text(list[0].confirmed);
+    });
+    </script>
+    <div class="heading">
+     Total Confirmed cases in India : <span id ="confirmed" class="red"></span>&nbsp;&nbsp;&nbsp;
+     Total Active cases in India : <span id ="active" class="red"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+     Total Recovered cases in India : <span id ="recovered" class="red"></span><br>&nbsp;
+    </div>
+     <div class="container">
+      <div class="row">
+        <div class="col-sm first">
+          
+        </div>
+        <div class="col-sm second">
+          
+        </div>
+        <div class="col-sm third">
+          
+        </div>
+      </div>
+    </div>
+</body>
+</html>
+
