@@ -31,7 +31,7 @@
        i=1;
        list.forEach(function(data){
          var card = "<div class = \"pos card\"  ><img class=\"card-img-top\" src=\"assets/" +
-           data.statecode+".jpg\" alt=\"Card image cap\"> <br> State : " 
+           data.statecode.toLowerCase()+".jpg\" alt=\"Card image cap\"> <br> State : " 
           + data.state  + "<br> Confirmed cases : " + data.confirmed + "<br> Active cases : " +
            data.active + " </div><br> ";
            if(i%3==1)
